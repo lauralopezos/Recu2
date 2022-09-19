@@ -1,0 +1,66 @@
+using namespace pilapalindromo;
+
+typedef struct Nodo
+{
+ int dato;
+ struct Nodo *next;
+}*Pila;
+
+void agregar(Pila&y,int valor)
+{
+ Pila x=new(struct Nodo);
+ x->dato = valor;    
+ x->next = y;
+ y = x;
+}
+ 
+int quitar(Pila&y)
+{
+ int valor = y -> dato;
+ Pila x = y;
+ y = y -> next;
+ delete(x);
+ return valor;
+}
+    
+int main()
+{
+ system("color f0");
+ 
+ Pila P = NULL;
+ int num, nro, band = 1;
+ 
+ cout<<endl<<endl<<"Ingresa un número:  ";
+ cin >> num;   
+ 
+ nro = num;
+ 
+ while(nro > 0)
+      {
+       agregar(P,nro%10);
+       nro = nro/10;
+       }
+ 
+ nro = num;
+       
+ while(nro>0)
+      {
+       
+       if(nro%10 != quitar(P))
+      
+          band = 0;
+      
+       nro = nro/10;
+      }
+ 
+ if(band == 1)
+ 
+    cout<<"\n     >>> El número es palindromo"<<endl;
+ else
+    cout<<"\n     >>> El número no es palindromo"<<endl;
+    
+    
+ cout<<endl<<endl;
+ system("PAUSA");
+ return EXIT_SUCCESS;
+}
